@@ -1,6 +1,6 @@
 <div align="center">
 
-# ✨ Trackify
+# Trackify
 
 <p style="font-size:1.2em; font-style:italic;">Build Habits That Last</p>
 
@@ -23,10 +23,10 @@
 Trackify is a full-stack web application designed to help users build and maintain habits through consistent daily tracking. The application provides a beautiful, intuitive interface for tracking habits, building streaks, and visualizing progress over time.
 
 <p align="center">
-  <img src="https://via.placeholder.com/800x200?text=Trackify+App+Preview" alt="App Preview" style="border-radius:8px; box-shadow:0 4px 8px rgba(0,0,0,0.1);" />
+  <img src="trackify-frontend/App Preview.png" alt="App Preview" style="border-radius:8px; box-shadow:0 4px 8px rgba(0,0,0,0.1); max-width:900px; width:100%;" />
 </p>
 
-## ✨ Features
+## Features
 
 - **User Authentication**: Secure authentication via Clerk
 - **Habit Tracking**: Create and track daily habits
@@ -56,7 +56,7 @@ Trackify is a full-stack web application designed to help users build and mainta
 </table>
 </details>
 
-## 🛠 Technologies
+## Technologies
 
 <table>
   <tr>
@@ -83,14 +83,14 @@ Trackify is a full-stack web application designed to help users build and mainta
   </tr>
 </table>
 
-## 📋 Prerequisites
+## Prerequisites
 
 - Node.js (v14 or higher)
 - MongoDB
 - npm or yarn
 - Clerk account for authentication
 
-## 🚀 Installation
+## Installation
 
 ### Clone the Repository
 
@@ -128,7 +128,7 @@ VITE_CLERK_PUBLISHABLE_KEY=your_clerk_publishable_key
 VITE_API_URL=http://localhost:5000/api
 ```
 
-## 🏃 Running the Application
+## Running the Application
 
 <table>
   <tr>
@@ -147,7 +147,7 @@ npm run dev</code></pre>
   </tr>
 </table>
 
-## 📱 Usage
+## Usage
 
 1. **Sign Up/Login**: Use Clerk authentication to create an account or log in
 2. **Create Trackers**: Add new habits to track with optional defined periods
@@ -155,21 +155,21 @@ npm run dev</code></pre>
 4. **Track Progress**: View your streaks and calendar to see your consistency
 5. **Toggle Views**: Switch between grid and list views as needed
 
-## 📷 Screenshots
+## Screenshots
 
 <div align="center">
 <table>
   <tr>
-    <td><img src="https://via.placeholder.com/400x225?text=Trackify+Dashboard" alt="Dashboard" style="border-radius:6px; box-shadow:0 2px 4px rgba(0,0,0,0.1);"/></td>
-    <td><img src="https://via.placeholder.com/400x225?text=Trackify+Login" alt="Login" style="border-radius:6px; box-shadow:0 2px 4px rgba(0,0,0,0.1);"/></td>
+    <td><img src="trackify-frontend/Dashboard.png" alt="Dashboard" style="border-radius:6px; box-shadow:0 2px 4px rgba(0,0,0,0.1);"/></td>
+    <td><img src="trackify-frontend/Login.png" alt="Login" style="border-radius:6px; box-shadow:0 2px 4px rgba(0,0,0,0.1);"/></td>
   </tr>
   <tr>
     <td align="center"><b>Dashboard View</b></td>
     <td align="center"><b>Login Page</b></td>
   </tr>
   <tr>
-    <td><img src="https://via.placeholder.com/400x225?text=Create+Tracker" alt="Create Tracker" style="border-radius:6px; box-shadow:0 2px 4px rgba(0,0,0,0.1);"/></td>
-    <td><img src="https://via.placeholder.com/400x225?text=Statistics+View" alt="Statistics" style="border-radius:6px; box-shadow:0 2px 4px rgba(0,0,0,0.1);"/></td>
+    <td><img src="trackify-frontend/Create Tracker.png" alt="Create Tracker" style="border-radius:6px; box-shadow:0 2px 4px rgba(0,0,0,0.1);"/></td>
+    <td><img src="trackify-frontend/Statistics.png" alt="Statistics" style="border-radius:6px; box-shadow:0 2px 4px rgba(0,0,0,0.1);"/></td>
   </tr>
   <tr>
     <td align="center"><b>Tracker Creation</b></td>
@@ -178,7 +178,12 @@ npm run dev</code></pre>
 </table>
 </div>
 
-## 🔑 Environment Variables
+<div align="center">
+  <img src="trackify-frontend/App Preview.png" alt="App Preview" style="border-radius:8px; box-shadow:0 4px 8px rgba(0,0,0,0.1); max-width:900px; width:100%;" />
+  <p><b>Full Application Overview</b></p>
+</div>
+
+## Environment Variables
 
 <table>
   <tr>
@@ -217,7 +222,7 @@ npm run dev</code></pre>
   </tr>
 </table>
 
-## 🗂 Project Structure
+## Project Structure
 
 ```
 trackify/
@@ -236,7 +241,7 @@ trackify/
         └── main.jsx      # Entry point
 ```
 
-## 👥 Contributing
+## Contributing
 
 Contributions are welcome! Please feel free to submit a Pull Request.
 
@@ -246,11 +251,11 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 4. Push to the branch (`git push origin feature/amazing-feature`)
 5. Open a Pull Request
 
-## 📄 License
+## License
 
 This project is licensed under the MIT License - see the LICENSE file for details.
 
-## 👨‍💻 Author
+## Author
 
 <div align="center">
   <h3>Himanshu Saraswat</h3>
