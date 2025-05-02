@@ -1,12 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 
 const TrackerForm = ({ onCreate }) => {
   const [name, setName] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isDefinedPeriod, setIsDefinedPeriod] = useState(false);
   const [targetDays, setTargetDays] = useState(30);
+  const [showSelect, setShowSelect] = useState(true);
   const [startDate, setStartDate] = useState(new Date().toISOString().split('T')[0]);
   const [showAdvanced, setShowAdvanced] = useState(false);
+  const customInputRef = useRef(null);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -27,10 +29,50 @@ const TrackerForm = ({ onCreate }) => {
       // Reset form if submission successful
       setIsDefinedPeriod(false);
       setTargetDays(30);
+      setShowSelect(true);
       setStartDate(new Date().toISOString().split('T')[0]);
       setShowAdvanced(false);
     } finally {
       setIsSubmitting(false);
+    }
+  };
+
+  const handleDaysChange = (e) => {
+    const value = e.target.value;
+    if (value === 'custom') {
+      setShowSelect(false);
+      setTimeout(() => {
+        if (customInputRef.current) {
+          customInputRef.current.focus();
+        }
+      }, 10);
+    } else {
+      setTargetDays(Number(value));
+    }
+  };
+
+  const handleCustomDaysChange = (e) => {
+    const value = e.target.value;
+    // Only allow positive integers
+    if (value === '' || /^[1-9]\d*$/.test(value)) {
+      setTargetDays(value === '' ? '' : Number(value));
+    }
+  };
+
+  const handleCustomDaysBlur = () => {
+    if (targetDays === '' || isNaN(targetDays)) {
+      setTargetDays(30);
+      setShowSelect(true);
+    }
+  };
+  
+  const handleCustomKeyDown = (e) => {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      customInputRef.current.blur();
+    } else if (e.key === 'Escape') {
+      setTargetDays(30);
+      setShowSelect(true);
     }
   };
 
@@ -70,7 +112,7 @@ const TrackerForm = ({ onCreate }) => {
             <button
               type="submit"
               className="w-full bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white font-medium px-6 py-2.5 rounded-md transition duration-150 ease-in-out flex items-center justify-center disabled:opacity-50 disabled:cursor-not-allowed shadow-sm"
-              disabled={!name.trim() || isSubmitting}
+              disabled={!name.trim() || isSubmitting || (targetDays === '')}
             >
               {isSubmitting ? (
                 <>
@@ -142,26 +184,55 @@ const TrackerForm = ({ onCreate }) => {
                 <div>
                   <label htmlFor="target-days" className={labelClass}>Number of Days</label>
                   <div className="relative">
-                    <select
-                      id="target-days"
-                      value={targetDays}
-                      onChange={(e) => setTargetDays(Number(e.target.value))}
-                      className={selectClass}
-                    >
-                      <option value="7">7 days (1 week)</option>
-                      <option value="14">14 days (2 weeks)</option>
-                      <option value="21">21 days (3 weeks)</option>
-                      <option value="30">30 days (1 month)</option>
-                      <option value="60">60 days (2 months)</option>
-                      <option value="90">90 days (3 months)</option>
-                      <option value="180">180 days (6 months)</option>
-                      <option value="365">365 days (1 year)</option>
-                    </select>
-                    <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-indigo-500">
-                      <svg className="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-                        <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/>
-                      </svg>
-                    </div>
+                    {showSelect ? (
+                      <>
+                        <select
+                          id="target-days"
+                          value={targetDays}
+                          onChange={handleDaysChange}
+                          className={selectClass}
+                        >
+                          <option value="7">7 days (1 week)</option>
+                          <option value="14">14 days (2 weeks)</option>
+                          <option value="21">21 days (3 weeks)</option>
+                          <option value="30">30 days (1 month)</option>
+                          <option value="60">60 days (2 months)</option>
+                          <option value="90">90 days (3 months)</option>
+                          <option value="180">180 days (6 months)</option>
+                          <option value="365">365 days (1 year)</option>
+                          <option value="custom">Custom number of days...</option>
+                        </select>
+                        <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-indigo-500">
+                          <svg className="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                            <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/>
+                          </svg>
+                        </div>
+                      </>
+                    ) : (
+                      <div className="relative">
+                        <input
+                          ref={customInputRef}
+                          id="custom-days-input"
+                          type="text"
+                          value={targetDays}
+                          onChange={handleCustomDaysChange}
+                          onBlur={handleCustomDaysBlur}
+                          onKeyDown={handleCustomKeyDown}
+                          placeholder="Enter number of days"
+                          className={inputClass + " pr-10"}
+                          autoFocus
+                        />
+                        <button
+                          type="button"
+                          onClick={() => setShowSelect(true)}
+                          className="absolute inset-y-0 right-0 flex items-center px-3 text-indigo-500 hover:text-indigo-700"
+                        >
+                          <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                          </svg>
+                        </button>
+                      </div>
+                    )}
                   </div>
                 </div>
                 
